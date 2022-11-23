@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="flex flex-col min-h-screen bg-[#fefefe]">
     <Header />
     <transition name="slide">
       <Cart v-if="showCart" class="z-50" />
@@ -80,7 +80,9 @@ export default {
 </script>
 
 <style lang="postcss">
-html,
+html {
+  font-family: 'Source Sans Pro', sans-serif;
+},
 body {
   @apply text-gray-900;
   scroll-behavior: smooth;
@@ -98,7 +100,7 @@ body {
 
 
 .container {
-  max-width: 1280px;
+  max-width: 1200px;
 }
 
 img {

@@ -1,11 +1,11 @@
 <template>
   <div class="flex flex-col gap-1 justify-between">
-    <div class="flex flex-wrap py-2 relative justify-between" v-for="(attr, i) in attrs" :key="i">
+    <div class="flex flex-wrap mb-5 relative justify-between" v-for="(attr, i) in attrs" :key="i">
 
       <!-- COLOR SWATCHES -->
       <div v-if="attr.name == 'pa_color' || attr.name == 'color'" class="grid gap-2">
-        <div class="text-sm">Color<span class="text-gray-400 capitalize">: {{ activeValue(attr.name) }}</span></div>
-        <div class="flex gap-2">
+        <div class="text-base font-semibold text-[#333]">Color<span class="text-[#999] capitalize">: {{ activeValue(attr.name) }}</span></div>
+        <div class="flex gap-3">
           <span v-for="(option, i) in attr.options" :key="option.id">
             <label>
               <input class="hidden" :checked="i == 0" @change="updateAttrs($event)" type="radio" :class="`name-${attr.name}`" :name="attr.name" :value="option" :ref="attr.name" />
@@ -17,7 +17,7 @@
 
       <!-- DROPDOWN -->
       <div v-else-if="attr.options.length > 8" class="grid gap-2">
-        <div class="text-sm">{{ attr.label }}<span class="text-gray-400 capitalize">: {{ activeValue(attr.name) }}</span></div>
+        <div class="text-base font-semibold text-[#333]">{{ attr.label }}<span class="text-[#999] capitalize">: {{ activeValue(attr.name) }}</span></div>
         <select :name="attr.name" :id="attr.name" @change="updateAttrs" :ref="attr.name" required class="border-white shadow">
           <option selected disabled hidden :value="null">Choose {{ attr.label }}</option>
           <option v-for="option in attr.options" :key="option" :value="option">{{ option }}</option>
@@ -26,12 +26,13 @@
 
       <!-- CHECKBOXES -->
       <div v-else class="grid gap-2">
-        <div class="text-sm">{{ attr.label }}<span class="text-gray-400 capitalize">: {{ activeValue(attr.name) }}</span></div>
-        <div class="flex gap-2">
+        <div class="text-base font-semibold text-[#333]">{{ attr.label }}<span class="text-[#999] capitalize">: {{ activeValue(attr.name) }}</span></div>
+        <div class="shadowAttributes"></div>
+        <div class="flex gap-3 overflow-x-auto">
           <span v-for="(option, i) in attr.options" :key="option.id">
             <label>
               <input class="hidden" :checked="i == 0" @change="updateAttrs($event)" type="radio" :class="`name-${attr.name}`" :name="attr.name" :value="option" :ref="attr.name" />
-              <span class="radio-button" :class="`picker-${option}`" :title="`${attr.name}: ${option}`">{{ option }}</span>
+              <span class="radio-button" :class="`picker-${option}`" :title="`${attr.name}: ${option}`">{{ option.toUpperCase() }}</span>
             </label>
           </span>
         </div>
@@ -69,18 +70,18 @@ export default {
 
 <style lang="postcss">
 select {
-  @apply border-2 rounded-2xl py-2 px-4 appearance-none;
+  @apply border-2 rounded-lg py-2 px-4 appearance-none;
   background: url("/images/chevron-down.svg") center right 10px no-repeat;
   background-size: 1rem;
   padding-right: 2.5rem;
 }
 
 .radio-button {
-  @apply border-transparent border-white rounded-lg cursor-pointer outline bg-gray-50 border-2 text-sm text-center outline-2 outline-gray-100 py-1.5 px-3 transition-all text-gray-800 inline-block hover: outline-gray-500 ;
+  @apply border border-[#999] rounded-lg cursor-pointer text-base text-[#333] text-center pt-1 pb-1.25 px-3 inline-block;
 }
 
 .color-button {
-  @apply border-transparent border-white cursor-pointer outline bg-gray-50 border-2 rounded-2xl text-sm text-center outline-2 outline-gray-100 transition-all text-gray-800 inline-block hover: outline-gray-500 ;
+  @apply cursor-pointer border border-[#999] rounded-lg text-base text-[#333] text-center inline-block;
   width: 2rem;
   height: 2rem;
 }
@@ -113,7 +114,22 @@ select {
   @apply bg-black;
 }
 
-input[type="radio"]:checked~span {
-  @apply outline outline-2 outline-gray-500;
+input[type="radio"]:checked ~ span,
+.radio-button:hover,
+.color-button:hover {
+  outline-color: #7c54b4;
+  outline-style: auto;
+  background-color: #7c54b40f;
+  color: #000;
+}
+.shadowAttributes {
+  background: -webkit-gradient(linear, left top, right top, color-stop(100%, hsl(0deg, 0%, 100%)), color-stop(0, rgba(255, 255, 255, 0)));
+  z-index: 1;
+  position: absolute;
+  height: 40px;
+  top: 30px;
+  pointer-events: none;
+  width: 30px;
+  right: 0px;
 }
 </style>
