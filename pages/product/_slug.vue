@@ -98,7 +98,7 @@
             <div class="text-[#333] text-base mb-2 font-semibold md:text-sm lg:text-base">
               Featured Information
             </div>
-            <div class="description overflow-hidden max-h-56 text-sm text-[#666] sm:max-h-72 md:max-h-48 md:text-xs md:text-[#333] lg:max-h-86 lg:text-sm">
+            <div class="description overflow-hidden max-h-88 text-sm text-[#666] sm:max-h-72 md:max-h-48 md:text-xs md:text-[#333] lg:max-h-86 lg:text-sm">
               <ul>
                 <li>
                   Free returns within 30 days. Click for detailed
