@@ -1,30 +1,15 @@
 <template>
   <div class="relative pointer-events-auto">
     <div class="flex h-full items-center border-b border-[#e6e6e6] overflow-auto md:border md:rounded-[1.25rem] md:w-[400px] lg:w-[500px]">
-      <NuxtImg
-        fit="outside"
-        format="webp"
-        width="600px"
-        :src="firstImage"
-        class="w-full object-center transform"
-        alt="Main Product Image"
-      />
+      <NuxtImg class="w-full object-center" width="1000px" format="webp" fit="outside" :src="firstImage" v-show="imageToShow === null" />
+      <NuxtImg class="w-full object-center" width="1000px" format="webp" fit="outside" :src="mainImage" v-show="imageToShow === 0" />
+      <NuxtImg class="w-full object-center" width="1000px" format="webp" fit="outside" v-for="(node, i) in gallery.nodes" :key="i" :src="node.sourceUrl" v-show="imageToShow === i + 1"/>
     </div>
 
     <div class="bullets-wrapper">
-      <div class="bullets-container gap-2">
-        <NuxtImg
-          v-for="(img, i) in gallery.nodes"
-          :key="`image-${i}`"
-          fit="outside"
-          format="webp"
-          width="600px"
-          :alt="`Product thumbnail #${i}`"
-          :src="img.sourceUrl"
-          class="w-5 rounded-sm sm:w-10 md:w-6 lg:w-8"
-          :class="{focused: i == activeThumb}"
-          @mouseover="currentThumbnail(img.sourceUrl, i)"
-        />
+      <div v-if="gallery.nodes.length" class="bullets-container gap-2">
+        <NuxtImg :class="{focused: imageToShow == null}" class="opacity-60 w-5 rounded-sm sm:w-10 md:w-6 lg:w-8" width="200px" format="webp" fit="outside" :src="firstImage" @mouseover="changeImage(null)" />
+        <NuxtImg :class="{focused: imageToShow === i + 1}" class="opacity-60 w-5 rounded-sm sm:w-10 md:w-6 lg:w-8" width="200px" format="webp" fit="outside" v-for="(node, i) in gallery.nodes" :key="i" :src="node.sourceUrl" @mouseover="changeImage(i + 1)"/>
       </div>
     </div>
   </div>
@@ -34,24 +19,25 @@
 export default {
   data() {
     return {
-      activeThumb: 0
-    }
+      imageToShow: 0,
+    };
   },
-  props: [
-    "firstImage",
-    "gallery"
-  ],
+  props: ["firstImage", "mainImage", "gallery", "node"],
   methods: {
-    currentThumbnail: function (img, i) {
-      this.firstImage = img;
-      this.activeThumb = i;
-    }
-  }
+    changeImage(index) {
+      this.imageToShow = index;
+    },
+  },
+  watch: {
+    mainImage(newImage) {
+      this.imageToShow = 0;
+    },
+  },
 };
 </script>
 <style lang="scss">
 .focused {
-  opacity: 0.4;
+  opacity: 1;
 }
 .bullets-wrapper {
   padding: 0.5rem;
