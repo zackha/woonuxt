@@ -1,6 +1,6 @@
 <template>
   <div class="relative pointer-events-auto">
-    <div class="flex h-full items-center border-b border-[#e6e6e6] overflow-auto md:border md:rounded-[1.25rem] md:w-[400px] lg:w-[500px]">
+    <div class="flex h-full items-center border-b border-[#e6e6e6] overflow-auto md:(border rounded-[1.25rem] w-[400px]) lg:w-[500px]">
       <NuxtImg class="w-full object-center" width="1000px" format="webp" fit="outside" :src="firstImage" v-show="imageToShow === null" />
       <NuxtImg class="w-full object-center" width="1000px" format="webp" fit="outside" :src="mainImage" v-show="imageToShow === 0" />
       <NuxtImg class="w-full object-center" width="1000px" format="webp" fit="outside" v-for="(node, i) in gallery.nodes" :key="i" :src="node.sourceUrl" v-show="imageToShow === i + 1"/>

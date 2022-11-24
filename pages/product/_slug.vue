@@ -14,7 +14,7 @@
     <div
       class="block border border-[#e6e6e6] overflow-hidden bg-white shadow rounded-2xl box-border md:rounded-4xl"
     >
-      <div class="flex flex-col justify-between md:flex-row md:p-5 md:gap-6">
+      <div class="flex flex-col justify-between md:(flex-row p-5 gap-6)">
         <ProductImageGallery
           :first-image="product.image.sourceUrl" 
           :main-image="type.image.sourceUrl" 
@@ -28,7 +28,7 @@
             <StarRating
               :rating="product.averageRating"
               :count="product.reviewCount"
-              class="my-1 sm:my-2 inline-flex items-center text-xs text-[#666] sm:text-sm"
+              class="my-1 inline-flex items-center text-xs text-[#666] sm:(text-sm my-2)"
             />
             <div class="grid grid-flow-col">
             <ProductPrice
@@ -98,7 +98,7 @@
             <div class="text-[#333] text-base mb-2 font-semibold md:text-sm lg:text-base">
               Featured Information
             </div>
-            <div class="description overflow-hidden max-h-56 text-sm text-[#666] sm:max-h-72 md:max-h-48 md:text-xs md:text-[#333] lg:max-h-86 lg:text-sm">
+            <div class="description leading-7 overflow-hidden max-h-84 text-sm text-[#666] sm:max-h-72 md:(max-h-48 text-xs text-[#333] leading-7) lg:(max-h-86 text-sm leading-8)">
               <ul>
                 <li>
                   Free returns within 30 days. Click for detailed
@@ -299,8 +299,7 @@ export default {
 <style lang="scss">
 .description ul li {
   background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxlbGxpcHNlIHJ5PSIzIiByeD0iMyIgY3k9IjMiIGN4PSIzIiBmaWxsPSIjYzljOWM5Ii8+PC9zdmc+)
-    no-repeat 0 14px !important;
+    no-repeat 0 .8rem;
   padding-left: 0.938rem;
-  line-height: 2rem;
 }
 </style>
