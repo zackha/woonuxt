@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col gap-1 justify-between">
-    <div class="flex flex-wrap mb-5 relative justify-between" v-for="(attr, i) in attrs" :key="i">
+    <div class="flex flex-wrap pb-4.5 relative justify-between" v-for="(attr, i) in attrs" :key="i">
 
       <!-- COLOR SWATCHES -->
       <div v-if="attr.name == 'pa_color' || attr.name == 'color'" class="grid gap-2">
-        <div class="text-base font-semibold text-[#333]">Color<span class="text-[#999] capitalize">: {{ activeValue(attr.name) }}</span></div>
+        <div class="text-base font-semibold text-[#333] leading-5">Color: <span class="text-[#999] capitalize">{{ activeValue(attr.name) }}</span></div>
         <div class="flex gap-3">
           <span v-for="(option, i) in attr.options" :key="option.id">
             <label>
@@ -17,7 +17,7 @@
 
       <!-- DROPDOWN -->
       <div v-else-if="attr.options.length > 8" class="grid gap-2">
-        <div class="text-base font-semibold text-[#333]">{{ attr.label }}<span class="text-[#999] capitalize">: {{ activeValue(attr.name) }}</span></div>
+        <div class="text-base font-semibold text-[#333] leading-5">{{ attr.label }}: <span class="text-[#999] capitalize">{{ activeValue(attr.name) }}</span></div>
         <select :name="attr.name" :id="attr.name" @change="updateAttrs" :ref="attr.name" required class="border-white shadow">
           <option selected disabled hidden :value="null">Choose {{ attr.label }}</option>
           <option v-for="option in attr.options" :key="option" :value="option">{{ option }}</option>
@@ -26,9 +26,9 @@
 
       <!-- CHECKBOXES -->
       <div v-else class="grid gap-2">
-        <div class="text-base font-semibold text-[#333]">{{ attr.label }}<span class="text-[#999] capitalize">: {{ activeValue(attr.name) }}</span></div>
+        <div class="text-base font-semibold text-[#333] leading-5">{{ attr.label }}: <span class="text-[#999] capitalize">{{ activeValue(attr.name) }}</span></div>
         <div class="shadowAttributes"></div>
-        <div class="flex gap-3 overflow-x-auto">
+        <div class="flex gap-2.5 overflow-x-auto">
           <span v-for="(option, i) in attr.options" :key="option.id">
             <label>
               <input class="hidden" :checked="i == 0" @change="updateAttrs($event)" type="radio" :class="`name-${attr.name}`" :name="attr.name" :value="option" :ref="attr.name" />
@@ -59,7 +59,7 @@ export default {
     activeValue(refName) {
       if (typeof document === "undefined") return null;
       let radioValue = document.querySelector(`.name-${refName}:checked`);
-      return radioValue ? radioValue.value : this.$refs[refName]?.[0]?.value;
+      return radioValue ? radioValue.value.toUpperCase() : this.$refs[refName]?.[0]?.value;
     }
   },
   mounted() {
@@ -77,11 +77,11 @@ select {
 }
 
 .radio-button {
-  @apply border border-[#999] rounded-lg cursor-pointer text-base text-[#333] text-center pt-1 pb-1.25 px-3 inline-block;
+  @apply cursor-pointer whitespace-nowrap relative text-center text-[#333] border border-[#999] rounded-lg block px-3.5 py-1.25 m-0.25;
 }
 
 .color-button {
-  @apply cursor-pointer border border-[#999] rounded-lg text-base text-[#333] text-center inline-block;
+  @apply cursor-pointer whitespace-nowrap relative text-center text-[#333] border border-[#999] rounded-lg block m-0.25;
   width: 2rem;
   height: 2rem;
 }
@@ -117,17 +117,16 @@ select {
 input[type="radio"]:checked ~ span,
 .radio-button:hover,
 .color-button:hover {
-  outline-color: #7c54b4;
-  outline-style: auto;
   background-color: #7c54b40f;
-  color: #000;
+  color: #7c54b4;
+  outline: auto;
 }
 .shadowAttributes {
   background: -webkit-gradient(linear, left top, right top, color-stop(100%, hsl(0deg, 0%, 100%)), color-stop(0, rgba(255, 255, 255, 0)));
   z-index: 1;
   position: absolute;
-  height: 40px;
-  top: 30px;
+  height: 45px;
+  top: 25px;
   pointer-events: none;
   width: 30px;
   right: 0px;

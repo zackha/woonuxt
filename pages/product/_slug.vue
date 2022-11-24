@@ -16,8 +16,10 @@
     >
       <div class="flex flex-col justify-between md:flex-row md:p-5 md:gap-6">
         <ProductImageGallery
-          :first-image="product.image.sourceUrl"
-          :gallery="product.galleryImages"
+          :first-image="product.image.sourceUrl" 
+          :main-image="type.image.sourceUrl" 
+          :gallery="product.galleryImages" 
+          :node="product"
         />
 
         <div class="p-4 sm:p-5 md:p-0">
@@ -96,7 +98,7 @@
             <div class="text-[#333] text-base mb-2 font-semibold md:text-sm lg:text-base">
               Featured Information
             </div>
-            <div class="description overflow-auto max-h-56 text-sm text-[#666] sm:max-h-72 md:max-h-48 md:text-xs md:text-[#333] lg:max-h-86 lg:text-sm">
+            <div class="description overflow-hidden max-h-56 text-sm text-[#666] sm:max-h-72 md:max-h-48 md:text-xs md:text-[#333] lg:max-h-86 lg:text-sm">
               <ul>
                 <li>
                   Free returns within 30 days. Click for detailed
@@ -128,7 +130,7 @@
         </div>
       </div>
     </div>
-    <div class="my-24">
+    <div class="mt-8">
       <div class="font-semibold text-xl mb-4">Related Products</div>
       <ProductRow :products="product.related.nodes" class="grid-cols-2 md:grid-cols-4 lg:grid-cols-5" />
     </div>
@@ -300,16 +302,5 @@ export default {
     no-repeat 0 14px !important;
   padding-left: 0.938rem;
   line-height: 2rem;
-}
-.description::-webkit-scrollbar {
-  width: 4px;
-}
-.description::-webkit-scrollbar-thumb {
-  background: #e6e6e6;
-  border-radius: 100px;
-}
-.description::-webkit-scrollbar-track {
-  background: #f9f9f9;
-  border-radius: 100px;
 }
 </style>
