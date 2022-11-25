@@ -27,8 +27,7 @@
       <!-- CHECKBOXES -->
       <div v-else class="grid gap-2">
         <div class="text-base font-semibold text-[#333] leading-5">{{ attr.label }}: <span class="text-[#999] capitalize">{{ activeValue(attr.name) }}</span></div>
-        <div class="shadowAttributes"></div>
-        <div class="flex gap-2.5 overflow-x-auto">
+        <div class="flex gap-2 overflow-x-auto px-4 -ml-4 w-[calc(100%+2rem)]">
           <span v-for="(option, i) in attr.options" :key="option.id">
             <label>
               <input class="hidden" :checked="i == 0" @change="updateAttrs($event)" type="radio" :class="`name-${attr.name}`" :name="attr.name" :value="option" :ref="attr.name" />
