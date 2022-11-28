@@ -8,7 +8,7 @@
 
     <div class="bullets-wrapper">
       <div v-if="gallery.nodes.length" class="bullets-container gap-2">
-        <NuxtImg :class="{focused: imageToShow == null}" class="opacity-60 w-5 rounded-sm sm:w-10 md:w-6 lg:w-8" width="200px" format="webp" fit="outside" :src="firstImage" @mouseover="changeImage(null)" />
+        <NuxtImg :class="{focused: imageToShow === null || imageToShow === 0}" class="opacity-60 w-5 rounded-sm sm:w-10 md:w-6 lg:w-8" width="200px" format="webp" fit="outside" :src="firstImage" @mouseover="changeImage(null)" />
         <NuxtImg :class="{focused: imageToShow === i + 1}" class="opacity-60 w-5 rounded-sm sm:w-10 md:w-6 lg:w-8" width="200px" format="webp" fit="outside" v-for="(node, i) in gallery.nodes" :key="i" :src="node.sourceUrl" @mouseover="changeImage(i + 1)"/>
       </div>
     </div>
