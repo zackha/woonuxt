@@ -15,6 +15,9 @@ export default {
 };
 </script>
 <style lang="scss">
+button.disabled {
+  cursor: not-allowed;
+}
 .trnstn {
   transition: all 0.3s ease-in-out;
 }
