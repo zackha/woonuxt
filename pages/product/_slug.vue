@@ -42,6 +42,7 @@
           <form @submit.prevent="triggerAddToCart">
             <AttributeSelections
               v-if="product.type == 'VARIABLE' && product.attributes"
+              :variants="product.variations.nodes"
               :attrs="product.attributes.nodes.filter((attr) => attr.variation != false)"
               @attrs-changed="updateSelectedVariations"
             />

@@ -28,10 +28,10 @@
       <div v-else class="grid gap-2">
         <div class="text-base font-semibold text-[#333] leading-5">{{ attr.label }}: <span class="text-[#999] capitalize">{{ activeValue(attr.name) }}</span></div>
         <div class="flex gap-2 overflow-x-auto px-6 -ml-6 w-[calc(100%+3rem)]">
-          <span v-for="(option, i) in attr.options" :key="option.id">
-            <label>
-              <input class="hidden" :checked="i == 0" @change="updateAttrs($event)" type="radio" :class="`name-${attr.name}`" :name="attr.name" :value="option" :ref="attr.name" />
-              <span class="radio-button" :class="`picker-${option}`" :title="`${attr.name}: ${option}`">{{ option.toUpperCase() }}</span>
+          <span v-for="(vars, i) in variants">
+            <label v-for="v in vars.attributes.nodes">
+              <input class="hidden" :checked="(i == variants.findIndex(obj => obj.stockStatus === `IN_STOCK`))" @change="updateAttrs($event)" type="radio" :class="`name-${attr.name}`" :name="attr.name" :value="v.value" :ref="attr.name" :id="i" :disabled="vars.stockStatus == `OUT_OF_STOCK`" />
+              <span :class="[{disabled: vars.stockStatus == `OUT_OF_STOCK`}, `picker-${v.value} radio-button`]" :title="`${attr.name}: ${v.value}`">{{ v.value }}</span>
             </label>
           </span>
         </div>
@@ -43,7 +43,7 @@
 
 <script>
 export default {
-  props: ["attrs"],
+  props: ["attrs", "variants"],
   methods: {
     updateAttrs() {
       const selectedVariations = this.attrs.map((row) => {
@@ -120,14 +120,12 @@ input[type="radio"]:checked ~ span,
   color: #7c54b4;
   outline: auto;
 }
-.shadowAttributes {
-  background: -webkit-gradient(linear, left top, right top, color-stop(100%, hsl(0deg, 0%, 100%)), color-stop(0, rgba(255, 255, 255, 0)));
-  z-index: 1;
-  position: absolute;
-  height: 45px;
-  top: 25px;
-  pointer-events: none;
-  width: 30px;
-  right: 0px;
+
+input[type="radio"] ~ span.disabled {
+  border-color: #e6e6e6;
+  color: #c7c7c7;
+  background: linear-gradient(to bottom left,transparent calc(50% - 1px),#e6e6e6 calc(50% - 1px),#e6e6e6 50%,transparent 50%);
+  cursor: not-allowed;
+  outline: none;
 }
 </style>
