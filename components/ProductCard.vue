@@ -1,11 +1,11 @@
 <template>
-  <NuxtLink :to="{ name: 'product-slug', params: { slug: node.slug, page: page } }" class="relative">
+  <NuxtLink :to="{ name: 'product-slug', params: { slug: node.slug, page: page } }" class="card-wrppr transition duration-500 relative rounded-xl border border-[#e6e6e6] overflow-hidden cursor-pointer">
     <SaleBadge :node="node" class="top-2 right-2 absolute" />
 
-    <NuxtPicture v-if="image" width="300" :src="image" :alt="node.image.altText || node.name" :title="node.image.title || node.name" :loading="index <= 1 || index == 5 ? 'eager' : 'lazy'" format="avif"
-      :imgAttrs="{ class: 'rounded-xl border border-[#e6e6e6] object-top object-cover w-full' }" fit="outside" />
+    <NuxtPicture class="overflow-hidden" v-if="image" width="300" :src="image" :alt="node.image.altText || node.name" :title="node.image.title || node.name" :loading="index <= 1 || index == 5 ? 'eager' : 'lazy'" format="avif"
+      :imgAttrs="{ class: 'rounded-t-lg card-img' }" fit="outside" />
 
-    <div class="py-3">
+    <div class="product-down p-3 relative bg-[#fefefe] z-10">
       <h2 class="text-sm text-[#666]">{{ node.name }}</h2>
       <div v-if="node.reviewCount !== 0" class="flex text-xs">
         <svg
@@ -20,7 +20,7 @@
         </svg>
         <span class="text-[#999] ml-1">({{node.reviewCount}})</span>
       </div>
-      <div v-if="node.salePrice" class="flex-col flex">
+      <div v-if="node.salePrice" class="flex-col flex mb-2">
         <div class="flex justify-between flex-row items-baseline">
           <div class="flex flex-row items-baseline">
             <p class="text-lg font-bold text-[#eb0037]">{{ node.salePrice }}</p>
@@ -67,3 +67,18 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+.card-wrppr:hover {
+  box-shadow: 0 2px 10px 1px rgb(0 0 0 / 5%);
+  background-color: #fff;
+}
+.card-wrppr:hover .product-down {
+  background-color: #fff;
+}
+.card-wrppr:hover .card-img {
+  transform: scale(1.03);
+}
+.card-wrppr .card-img {
+  transition: transform 0.5s ease;
+}
+</style>
