@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="{ name: 'product-slug', params: { slug: node.slug, page: page } }" class="card-wrppr transition duration-500 relative rounded-xl border border-[#e6e6e6] overflow-hidden cursor-pointer">
+  <NuxtLink :to="{ name: 'product-slug', params: { slug: node.slug, page: page } }" class="card-wrppr transition duration-200 relative rounded-xl border border-[#e6e6e6] overflow-hidden cursor-pointer">
     <SaleBadge :node="node" class="top-2 right-2 absolute" />
 
     <NuxtPicture class="overflow-hidden" v-if="image" width="300" :src="image" :alt="node.image.altText || node.name" :title="node.image.title || node.name" :loading="index <= 1 || index == 5 ? 'eager' : 'lazy'" format="avif"
@@ -69,16 +69,17 @@ export default {
 </script>
 <style lang="scss">
 .card-wrppr:hover {
-  box-shadow: 0 2px 10px 1px rgb(0 0 0 / 5%);
+  box-shadow: 0 19px 39px 0 rgb(0 0 0 / 20%);
   background-color: #fff;
+  border-color: rgb(0 0 0 / 0%)
 }
 .card-wrppr:hover .product-down {
-  background-color: #fff;
+  background-color: #fff
 }
 .card-wrppr:hover .card-img {
-  transform: scale(1.03);
+  transform: scale(1.03)
 }
 .card-wrppr .card-img {
-  transition: transform 0.5s ease;
+  transition: transform 0.5s ease
 }
 </style>

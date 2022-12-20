@@ -7,7 +7,7 @@
     </div>
 
     <!-- Products -->
-    <transition-group v-else name="shrink" mode="in-out" class="my-4 min-h-[600px] grid transition-all gap-4 product-grid lg:(my-5 gap-5)">
+    <transition-group v-else name="shrink" mode="in-out" class="my-4 grid transition-all gap-4 product-grid lg:(my-5 gap-5)">
       <ProductCard class="w-full" v-for="(node, i) in newProducts" :key="node.databaseId" :node="node" :index="i" :page="page" />
     </transition-group>
   </section>
