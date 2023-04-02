@@ -73,7 +73,6 @@
               </div>
             </div>
           </aside>
-
           <div>
             <div class="text-[#333] text-base mb-2 font-semibold md:text-sm lg:text-base">Featured Information</div>
             <div class="description leading-7 overflow-hidden max-h-84 text-sm text-[#666] sm:max-h-72 md:(max-h-48 text-xs text-[#333] leading-7) lg:(max-h-86 text-sm leading-8)">
