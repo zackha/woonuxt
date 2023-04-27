@@ -1,7 +1,8 @@
 <script setup>
 const { setProducts, updateProductList } = await useProducts();
-const { products } = await GqlGetProducts();
-setProducts(products?.nodes || []);
+const { data } = await useAsyncGql('getProducts');
+const products = data.value?.products?.nodes || [];
+setProducts(products || []);
 
 onMounted(() => {
   updateProductList();
